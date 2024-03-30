@@ -1,5 +1,5 @@
 using System.Diagnostics.Contracts;
-using Soenneker.Enums.DateTimePrecision;
+using Soenneker.Enums.UnitOfTime;
 
 namespace Soenneker.Extensions.DateTime.Quarter;
 
@@ -16,7 +16,7 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToStartOfQuarter(this System.DateTime dateTime)
     {
-        System.DateTime result = dateTime.ToStartOf(DateTimePrecision.Quarter);
+        System.DateTime result = dateTime.ToStartOf(UnitOfTime.Quarter);
         return result;
     }
 
@@ -28,7 +28,7 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToEndOfQuarter(this System.DateTime dateTime)
     {
-        System.DateTime result = dateTime.ToEndOf(DateTimePrecision.Quarter);
+        System.DateTime result = dateTime.ToEndOf(UnitOfTime.Quarter);
         return result;
     }
 
