@@ -20,6 +20,20 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    [Pure]
+    public static System.DateTime ToStartOfNextQuarter(this System.DateTime dateTime)
+    {
+        System.DateTime result = dateTime.ToStartOf(UnitOfTime.Quarter).AddMonths(3);
+        return result;
+    }
+
+    [Pure]
+    public static System.DateTime ToStartOfPreviousQuarter(this System.DateTime dateTime)
+    {
+        System.DateTime result = dateTime.ToStartOf(UnitOfTime.Quarter).AddMonths(-3);
+        return result;
+    }
+
     /// <summary>
     /// Adjusts the specified <paramref name="dateTime"/> to the end of its quarter.
     /// </summary>
@@ -32,6 +46,20 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    [Pure]
+    public static System.DateTime ToEndOfNextQuarter(this System.DateTime dateTime)
+    {
+        System.DateTime result = dateTime.ToEndOf(UnitOfTime.Quarter).AddMonths(3);
+        return result;
+    }
+
+    [Pure]
+    public static System.DateTime ToEndOfPreviousQuarter(this System.DateTime dateTime)
+    {
+        System.DateTime result = dateTime.ToEndOf(UnitOfTime.Quarter).AddMonths(-3);
+        return result;
+    }
+
     /// <summary>
     /// Adjusts the specified UTC <paramref name="utcNow"/>, converted to the time zone specified by <paramref name="tzInfo"/>, to the start of the previous quarter in that time zone.
     /// </summary>
@@ -41,8 +69,8 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToStartOfTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToTz(tzInfo).ToStartOfQuarter().ToUtc(tzInfo);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToStartOfQuarter().ToUtc(tzInfo);
+        return result;
     }
 
     /// <summary>
@@ -54,8 +82,8 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToStartOfNextTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToStartOfTzQuarter(tzInfo).AddMonths(3);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToStartOfNextQuarter().ToUtc(tzInfo);
+        return result;
     }
 
     /// <summary>
@@ -67,8 +95,8 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToStartOfPreviousTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToStartOfTzQuarter(tzInfo).AddMonths(-3);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToStartOfPreviousQuarter().ToUtc(tzInfo);
+        return result;
     }
 
     /// <summary>
@@ -80,8 +108,8 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToEndOfTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToTz(tzInfo).ToEndOfQuarter().ToUtc(tzInfo);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToEndOfQuarter().ToUtc(tzInfo);
+        return result;
     }
 
     /// <summary>
@@ -93,8 +121,8 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToEndOfNextTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToEndOfTzQuarter(tzInfo).AddMonths(3);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToEndOfNextQuarter().ToUtc(tzInfo);
+        return result;
     }
 
     /// <summary>
@@ -106,7 +134,7 @@ public static class DateTimeQuarterExtension
     [Pure]
     public static System.DateTime ToEndOfPreviousTzQuarter(this System.DateTime utcNow, System.TimeZoneInfo tzInfo)
     {
-        System.DateTime start = utcNow.ToEndOfTzQuarter(tzInfo).AddMonths(-3);
-        return start;
+        System.DateTime result = utcNow.ToTz(tzInfo).ToEndOfPreviousQuarter().ToUtc(tzInfo);
+        return result;
     }
 }
