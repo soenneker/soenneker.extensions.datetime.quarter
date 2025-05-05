@@ -1,4 +1,4 @@
-# Contributing to Soenneker.Extensions.DateTime.Quarter
+﻿# Contributing to Soenneker.Extensions.DateTime.Quarter
 
 We're excited that you're interested in contributing!
 
