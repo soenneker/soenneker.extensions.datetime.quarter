@@ -14,7 +14,7 @@
         <AssemblyName>Soenneker.Extensions.DateTime.Quarter</AssemblyName>
         <PackageId>Soenneker.Extensions.DateTime.Quarter</PackageId>
         <PackageTags>extensions datetime quarter timezone date time zone month conversion datetimequarterextension extension csharp dotnet c# .net</PackageTags>
-        <Copyright>Copyright © 2024-2025 Jake Soenneker</Copyright>
+        <Copyright>Copyright © 2024-2026 Jake Soenneker</Copyright>
         <Authors>Jake Soenneker</Authors>
         <Company>https://soenneker.com</Company>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
