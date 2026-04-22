@@ -6,10 +6,10 @@ namespace Soenneker.Extensions.DateTime.Quarter.Tests;
 
 public class DateTimeQuarterExtensionTests : UnitTest
 {
-    [Theory]
-    [InlineData("2023-01-15", "2023-01-01")]
-    [InlineData("2023-04-01", "2023-04-01")]
-    [InlineData("2023-12-31", "2023-10-01")]
+    [Test]
+    [Arguments("2023-01-15", "2023-01-01")]
+    [Arguments("2023-04-01", "2023-04-01")]
+    [Arguments("2023-12-31", "2023-10-01")]
     public void ToStartOfQuarter_Should_CorrectlyCalculateStartOfQuarter(string inputDate, string expectedDate)
     {
         // Arrange
@@ -22,10 +22,10 @@ public class DateTimeQuarterExtensionTests : UnitTest
         result.Should().Be(System.DateTime.Parse(expectedDate));
     }
 
-    [Theory]
-    [InlineData("2023-01-15", "2023-03-31 23:59:59.9999999")]
-    [InlineData("2023-04-01", "2023-06-30 23:59:59.9999999")]
-    [InlineData("2023-12-31", "2023-12-31 23:59:59.9999999")]
+    [Test]
+    [Arguments("2023-01-15", "2023-03-31 23:59:59.9999999")]
+    [Arguments("2023-04-01", "2023-06-30 23:59:59.9999999")]
+    [Arguments("2023-12-31", "2023-12-31 23:59:59.9999999")]
     public void ToEndOfQuarter_Should_CorrectlyCalculateEndOfQuarter(string inputDate, string expectedDateString)
     {
         // Arrange
@@ -39,3 +39,4 @@ public class DateTimeQuarterExtensionTests : UnitTest
         result.Should().BeCloseTo(expectedDate, TimeSpan.FromMilliseconds(1));
     }
 }
+
