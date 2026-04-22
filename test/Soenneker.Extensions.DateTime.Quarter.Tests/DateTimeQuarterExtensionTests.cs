@@ -1,7 +1,6 @@
 using AwesomeAssertions;
 using Soenneker.Tests.Unit;
 using System;
-using Xunit;
 
 namespace Soenneker.Extensions.DateTime.Quarter.Tests;
 
