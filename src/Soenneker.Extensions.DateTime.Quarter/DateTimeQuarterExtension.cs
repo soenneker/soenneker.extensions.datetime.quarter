@@ -20,6 +20,11 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    /// <summary>
+    /// Executes the to start of next quarter operation.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The result of the operation.</returns>
     [Pure]
     public static System.DateTime ToStartOfNextQuarter(this System.DateTime dateTime)
     {
@@ -27,6 +32,11 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    /// <summary>
+    /// Executes the to start of previous quarter operation.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The result of the operation.</returns>
     [Pure]
     public static System.DateTime ToStartOfPreviousQuarter(this System.DateTime dateTime)
     {
@@ -46,6 +56,11 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    /// <summary>
+    /// Executes the to end of next quarter operation.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The result of the operation.</returns>
     [Pure]
     public static System.DateTime ToEndOfNextQuarter(this System.DateTime dateTime)
     {
@@ -53,6 +68,11 @@ public static class DateTimeQuarterExtension
         return result;
     }
 
+    /// <summary>
+    /// Executes the to end of previous quarter operation.
+    /// </summary>
+    /// <param name="dateTime">The date time.</param>
+    /// <returns>The result of the operation.</returns>
     [Pure]
     public static System.DateTime ToEndOfPreviousQuarter(this System.DateTime dateTime)
     {
