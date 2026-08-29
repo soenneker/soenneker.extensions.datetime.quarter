@@ -21,10 +21,10 @@ public static class DateTimeQuarterExtension
     }
 
     /// <summary>
-    /// Executes the to start of next quarter operation.
+    /// Returns midnight on the first day of the calendar quarter following the one containing the value.
     /// </summary>
-    /// <param name="dateTime">The date time.</param>
-    /// <returns>The result of the operation.</returns>
+    /// <param name="dateTime">The date and time to adjust.</param>
+    /// <returns>The start of the next quarter.</returns>
     [Pure]
     public static System.DateTime ToStartOfNextQuarter(this System.DateTime dateTime)
     {
@@ -33,10 +33,10 @@ public static class DateTimeQuarterExtension
     }
 
     /// <summary>
-    /// Executes the to start of previous quarter operation.
+    /// Returns midnight on the first day of the calendar quarter preceding the one containing the value.
     /// </summary>
-    /// <param name="dateTime">The date time.</param>
-    /// <returns>The result of the operation.</returns>
+    /// <param name="dateTime">The date and time to adjust.</param>
+    /// <returns>The start of the previous quarter.</returns>
     [Pure]
     public static System.DateTime ToStartOfPreviousQuarter(this System.DateTime dateTime)
     {
@@ -57,10 +57,10 @@ public static class DateTimeQuarterExtension
     }
 
     /// <summary>
-    /// Executes the to end of next quarter operation.
+    /// Returns the final tick of the calendar quarter following the one containing the value.
     /// </summary>
-    /// <param name="dateTime">The date time.</param>
-    /// <returns>The result of the operation.</returns>
+    /// <param name="dateTime">The date and time to adjust.</param>
+    /// <returns>The end of the next quarter.</returns>
     [Pure]
     public static System.DateTime ToEndOfNextQuarter(this System.DateTime dateTime)
     {
@@ -69,10 +69,10 @@ public static class DateTimeQuarterExtension
     }
 
     /// <summary>
-    /// Executes the to end of previous quarter operation.
+    /// Returns the final tick of the calendar quarter preceding the one containing the value.
     /// </summary>
-    /// <param name="dateTime">The date time.</param>
-    /// <returns>The result of the operation.</returns>
+    /// <param name="dateTime">The date and time to adjust.</param>
+    /// <returns>The end of the previous quarter.</returns>
     [Pure]
     public static System.DateTime ToEndOfPreviousQuarter(this System.DateTime dateTime)
     {
