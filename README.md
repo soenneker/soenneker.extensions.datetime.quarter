@@ -4,7 +4,8 @@
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.extensions.datetime.quarter/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.extensions.datetime.quarter/actions/workflows/codeql.yml)
 
 # ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Extensions.DateTime.Quarter
-A collection of helpful DateTime quarter (year) based extension methods.
+
+Computes current, previous, and next calendar-quarter boundaries for `DateTime`, with optional time-zone-aware UTC results.
 
 ## Installation
 
@@ -12,26 +13,41 @@ A collection of helpful DateTime quarter (year) based extension methods.
 dotnet add package Soenneker.Extensions.DateTime.Quarter
 ```
 
-## Quick start
+## Calendar-field boundaries
 
 ```csharp
 using Soenneker.Extensions.DateTime.Quarter;
 
-DateTime dateTime = DateTime.UtcNow;
-var result = dateTime.ToStartOfQuarter();
+System.DateTime value = new(2026, 8, 29, 16, 42, 30, DateTimeKind.Utc);
+
+System.DateTime start = value.ToStartOfQuarter();       // 2026-07-01 00:00:00
+System.DateTime end = value.ToEndOfQuarter();           // last tick of 2026-09-30
+System.DateTime nextStart = value.ToStartOfNextQuarter();
+System.DateTime previousEnd = value.ToEndOfPreviousQuarter();
 ```
 
-## Common operations
+Calendar quarters are January–March, April–June, July–September, and October–December.
 
-- `ToStartOfQuarter()` - Adjusts the specified `dateTime` to the start of its quarter. Returns a `System.DateTime` representing the first moment of the quarter.
-- `ToStartOfNextQuarter()` - Returns midnight on the first day of the next calendar quarter.
-- `ToStartOfPreviousQuarter()` - Returns midnight on the first day of the previous calendar quarter.
-- `ToEndOfQuarter()` - Adjusts the specified `dateTime` to the end of its quarter. Returns a `System.DateTime` representing the last moment of the quarter.
-- `ToEndOfNextQuarter()` - Returns the final tick of the next calendar quarter.
-- `ToEndOfPreviousQuarter()` - Returns the final tick of the previous calendar quarter.
-- `ToStartOfTzQuarter()` - Adjusts the specified UTC `utcNow`, converted to the time zone specified by `tzInfo`, to the start of the previous quarter in that time zone. Returns a `System.DateTime` representing the first moment of the previous quarter in UTC, adjusted for the specified time zone.
-- `ToStartOfNextTzQuarter()` - Converts the specified UTC `utcNow` to the time zone specified by `tzInfo`, and adjusts it to the end of its quarter in that time zone. Returns a `System.DateTime` representing the last moment of the quarter in UTC, adjusted for the specified time zone.
-- `ToStartOfPreviousTzQuarter()` - Adjusts the specified UTC `utcNow`, converted to the time zone specified by `tzInfo`, to the start of the previous quarter in that time zone. Returns a `System.DateTime` representing the first moment of the previous quarter in UTC, adjusted for the specified time zone.
-- `ToEndOfTzQuarter()` - Converts the specified UTC `utcNow` to the time zone specified by `tzInfo`, and adjusts it to the end of its quarter in that time zone. Returns a `System.DateTime` representing the last moment of the quarter in UTC, adjusted for the specified time zone.
-- `ToEndOfNextTzQuarter()` - Adjusts the specified UTC `utcNow`, converted to the time zone specified by `tzInfo`, to the end of the next quarter in that time zone. Returns a `System.DateTime` representing the last moment of the next quarter in UTC, adjusted for the specified time zone.
-- `ToEndOfPreviousTzQuarter()` - Adjusts the specified UTC `utcNow`, converted to the time zone specified by `tzInfo`, to the end of the previous quarter in that time zone. Returns a `System.DateTime` representing the last moment of the previous quarter in UTC, adjusted for the specified time zone.
+| Method pair | Selected quarter |
+| --- | --- |
+| `ToStartOfQuarter()` / `ToEndOfQuarter()` | Current |
+| `ToStartOfPreviousQuarter()` / `ToEndOfPreviousQuarter()` | Previous |
+| `ToStartOfNextQuarter()` / `ToEndOfNextQuarter()` | Next |
+
+Start methods return midnight on the quarter's first date. End methods return one tick before the following quarter. These methods operate on the input calendar fields, preserve `Kind`, and handle year rollover through `DateTime` calendar arithmetic.
+
+## Time-zone-aware boundaries
+
+```csharp
+TimeZoneInfo eastern = TimeZoneInfo.FindSystemTimeZoneById("America/New_York");
+System.DateTime utc = new(2026, 8, 29, 18, 0, 0, DateTimeKind.Utc);
+
+System.DateTime localQuarterStartUtc = utc.ToStartOfTzQuarter(eastern);
+System.DateTime localQuarterEndUtc = utc.ToEndOfTzQuarter(eastern);
+```
+
+Time-zone variants are available for the current, previous, and next quarter by adding `Tz` to the method name, such as `ToStartOfPreviousTzQuarter()` and `ToEndOfNextTzQuarter()`. They select the quarter using the input instant's local calendar and return the boundary as a UTC `DateTime`.
+
+If the input `Kind` is not `Utc`, its fields are treated as UTC rather than converted from the machine's local zone. Supply an actual UTC value to avoid ambiguity.
+
+Quarter ends are one tick before the following valid local quarter boundary. If a local quarter begins in a daylight-saving gap, the boundary advances to the first valid local minute; if it is ambiguous, the earlier UTC instant is selected.
